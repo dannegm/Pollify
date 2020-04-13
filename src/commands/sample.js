@@ -1,4 +1,4 @@
-export default function () {
+export default function (client) {
     return {
         command: 'describe',
         handler (sender, args) {

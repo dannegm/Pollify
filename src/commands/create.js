@@ -1,31 +1,14 @@
-import Discord from 'discord.js'
-import split from 'split-string'
-
-const splitOptions = {
-    separator: ' ',
-    quotes: ['"'],
-    keep (value) {
-        return value !== '"'
-    },
-}
-
-const isEmoji = text => {
-    const regex = /(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])/g
-    return regex.test(text)
-}
-
-const getDiscordID = emoji => {
-    return emoji.match(/([0-9]*)/g).find(i => i)
-}
+import { MessageEmbed } from 'discord.js'
+import { getDiscordID, isEmoji } from '@/utils/helpers'
 
 export default function (client) {
     return {
         command: 'create',
         async handler (sender, args) {
             try {
-                const [ channel, message, ...options] = split(args.join(' '), splitOptions)
+                const [channel, message, ...options] = args
 
-                const embededMessage = new Discord.MessageEmbed()
+                const embededMessage = new MessageEmbed()
                     .setColor('#d74242')
                     .setTitle('Encuesta')
                     // .setAuthor(
@@ -54,7 +37,7 @@ export default function (client) {
                     }
                 })
             } catch (err) {
-                console.log(err)
+                console.error(err)
             }
         }
     }

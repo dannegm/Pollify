@@ -1,9 +1,11 @@
-import Discord from 'discord.js'
+import { Client } from 'discord.js'
+
+import { handleCommands } from '@/utils/commandTools'
 
 import sampleCommand from '@/commands/sample'
 import createCommand from '@/commands/create'
 
-const client = new Discord.Client()
+const client = new Client()
 
 const awakeBot = config => {
     client.login(config.credentials.token)
@@ -21,33 +23,6 @@ const onMessage = message => {
         sampleCommand(client),
         createCommand(client),
     ])
-}
-
-const registerCommands = commands => {
-    const register = {}
-    commands.forEach(cmd => {
-        register[cmd.command] = cmd
-    })
-
-    return register
-}
-
-const handleCommands = (message, registeredCommands) => {
-    const commands = registerCommands(registeredCommands)
-
-    const [ promp, command, ...args ] = message.content.split(' ')
-
-    if (promp !== '$poll') {
-        return false
-    }
-
-    if (!command || !commands[command]) {
-        message.channel.send('Invalid command')
-        return false
-    }
-
-    commands[command].handler(message, args)
-    return true
 }
 
 export {
