@@ -1,0 +1,27 @@
+{
+    "name": "pollify",
+    "version": "1.0.0",
+    "description": "",
+    "main": "src/index.js",
+    "scripts": {
+        "dev": "nodemon --exec babel-node src",
+        "prod": "pm2 start src --interpreter babel-node",
+        "debug": "node inspect src"
+    },
+    "author": "dannegm",
+    "license": "MIT",
+    "dependencies": {
+        "@babel/polyfill": "^7.6.0",
+        "discord.js": "^12.1.1",
+        "dotenv": "^5.0.1",
+        "split-string": "^6.1.0"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.6.4",
+        "@babel/core": "^7.6.4",
+        "@babel/node": "^7.6.3",
+        "@babel/preset-env": "^7.6.3",
+        "babel-plugin-module-resolver": "^3.2.0",
+        "nodemon": "^1.17.3"
+    }
+}
